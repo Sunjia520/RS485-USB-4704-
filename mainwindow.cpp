@@ -400,9 +400,8 @@ void MainWindow::parse_data(){
     //时间
     switch (my_exchange_data->recive_data.at(8)) {
     case 0x00:
-        //焊接时间不显示
         ui->weld_time_radiobutton->setChecked(true);
-        ui->timedisplay->display((*(my_exchange_data->recive_data.constData()+15)<<8 | *(my_exchange_data->recive_data.constData()+16)));
+        ui->timedisplay->display((*(my_exchange_data->recive_data.constData()+16)<<8 | *(my_exchange_data->recive_data.constData()+17)));
         break;
     case 0x01:
         ui->intelvaltime_radioButton->setChecked(true);
@@ -710,7 +709,7 @@ void MainWindow::on_data_collect_initial_pushButton_clicked()
     }
     connect(mpControlThread, SIGNAL(SendAnalogData(QVector<double>)), this, SLOT(ReceiveAnalogData(QVector<double>)));
     ui->data_collect_save_pushButton->setEnabled(true);
-    ui->data_collect_stop_pushButton->setEnabled(true);
+    //ui->data_collect_stop_pushButton->setEnabled(true);
     ui->data_collect_start_pushButton->setEnabled(true);
 }
 
@@ -723,6 +722,8 @@ void MainWindow::on_data_collect_start_pushButton_clicked()
             i_series->clear();
             v_series->clear();
             mpControlThread->StartCollect();
+            ui->data_collect_stop_pushButton->setEnabled(true);
+            ui->data_collect_start_pushButton->setEnabled(false);
         }
 }
 
@@ -733,6 +734,10 @@ void MainWindow::on_data_collect_stop_pushButton_clicked()
     if (mpControlThread != nullptr && mpControlThread->IsCollecting()){
         mpControlThread->StopCollect();
         mpControlThread->StopSaving();
+        ui->data_collect_start_pushButton->setEnabled(true);
+        ui->data_collect_stop_pushButton->setEnabled(false);
+        ui->data_collect_save_pushButton->setEnabled(true);
+
     }
 }
 
@@ -740,6 +745,7 @@ void MainWindow::on_data_collect_stop_pushButton_clicked()
 void MainWindow::on_data_collect_save_pushButton_clicked()
 {
     if(g_SaveFolder.size()>0){
+        QMessageBox::information(this, tr("Information"), tr(" 已设置路径，开始保存！"), QMessageBox::Ok);
         time_t t = time(0);
         char tmp_time[64];
         strftime(tmp_time, sizeof(tmp_time), "%Y%m%d%H%M", localtime(&t));
@@ -748,6 +754,8 @@ void MainWindow::on_data_collect_save_pushButton_clicked()
         //mpControlThread->SetSavePath(savePath);
         mpControlThread->SetSavePath(savePath);
         mpControlThread->StartSaving();
+
+        ui->data_collect_save_pushButton->setEnabled(false);
     }else{
         QMessageBox::warning(this, tr("Warning"), tr("请设置保存文件的路径"), QMessageBox::Ok);
         return;
@@ -757,9 +765,11 @@ void MainWindow::on_data_collect_save_pushButton_clicked()
 void MainWindow::on_BrowserBtn_3_clicked()
 {
     mSavePath = QFileDialog::getExistingDirectory(this, tr("Save Path"), "D:/");
+    std::cout<<mSavePath.size()<<std::endl;
 
     if (!mSavePath.isEmpty()) {
-        ui->savepath_edit->setText(mSavePath);
+
+        ui->savepath_edit_3->setText(mSavePath);
 
         std::string tmp_dir = mSavePath.toStdString();
         tmp_dir = std::regex_replace(tmp_dir, std::regex("/"), std::string("\\"));
