@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1271</width>
-    <height>831</height>
+    <width>1091</width>
+    <height>1576</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,324 +15,199 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_6">
-    <item row="0" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="4,0,5">
-      <property name="spacing">
-       <number>30</number>
-      </property>
-      <property name="leftMargin">
-       <number>12</number>
-      </property>
-      <property name="rightMargin">
-       <number>12</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
+    <item row="0" column="0" rowspan="4">
+     <layout class="QVBoxLayout" name="verticalLayout_6">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_6">
-        <item>
-         <widget class="QLabel" name="label_13">
-          <property name="text">
-           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+       <widget class="QLabel" name="label_13">
+        <property name="text">
+         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; color:#aa0000;&quot;&gt;焊机通讯&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-         </widget>
-        </item>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1,1,2,3">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <property name="topMargin">
+         <number>9</number>
+        </property>
+        <property name="bottomMargin">
+         <number>9</number>
+        </property>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1,1,2,3">
-          <property name="spacing">
-           <number>34</number>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>11</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
           </property>
-          <property name="topMargin">
-           <number>9</number>
+          <property name="mouseTracking">
+           <bool>false</bool>
           </property>
-          <property name="bottomMargin">
-           <number>9</number>
+          <property name="title">
+           <string>端口设置</string>
           </property>
-          <item>
-           <widget class="QGroupBox" name="groupBox">
-            <property name="font">
-             <font>
-              <family>Times New Roman</family>
-              <pointsize>11</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="mouseTracking">
-             <bool>false</bool>
-            </property>
-            <property name="title">
-             <string>端口设置</string>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <layout class="QHBoxLayout" name="horizontalLayout_9">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout">
-               <item>
-                <widget class="QComboBox" name="comport_combox"/>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QPushButton" name="checkButton">
-                 <property name="text">
-                  <string>检查串口</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="connectButton">
-                 <property name="text">
-                  <string>打开串口</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="reflash">
-                 <property name="text">
-                  <string>刷新</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="disconnectButton">
-                 <property name="text">
-                  <string>断开连接</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="state">
-            <property name="font">
-             <font>
-              <family>Times New Roman</family>
-              <pointsize>11</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="title">
-             <string>状态和开关</string>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <item>
-              <widget class="QLabel" name="label_10">
-               <property name="maximumSize">
-                <size>
-                 <width>71</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>焊机状态</string>
-               </property>
-              </widget>
+              <widget class="QComboBox" name="comport_combox"/>
              </item>
              <item>
-              <widget class="QRadioButton" name="pulseweldradioButton">
-               <property name="text">
-                <string>脉冲焊</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="continueweldradioButton">
-               <property name="text">
-                <string>连续焊</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="weldstatepushButton">
-               <property name="text">
-                <string>下一个</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_2">
+              <spacer name="horizontalSpacer">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>20</width>
+                 <width>40</width>
                  <height>20</height>
                 </size>
                </property>
               </spacer>
              </item>
              <item>
-              <widget class="QCheckBox" name="maintan_arc_checkBox">
+              <widget class="QPushButton" name="checkButton">
                <property name="text">
-                <string>维弧开关</string>
+                <string>检查串口</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="mainarc_checkBox">
+              <widget class="QPushButton" name="connectButton">
                <property name="text">
-                <string>主弧开关</string>
+                <string>打开串口</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="reflash">
+               <property name="text">
+                <string>刷新</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="disconnectButton">
+               <property name="text">
+                <string>断开连接</string>
                </property>
               </widget>
              </item>
             </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="current_box">
-            <property name="font">
-             <font>
-              <family>Times New Roman</family>
-              <pointsize>11</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="title">
-             <string>电流</string>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="state">
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>11</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="title">
+           <string>状态和开关</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QLabel" name="label_10">
+             <property name="maximumSize">
+              <size>
+               <width>71</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>焊机状态</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="pulseweldradioButton">
+             <property name="text">
+              <string>脉冲焊</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="continueweldradioButton">
+             <property name="text">
+              <string>连续焊</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="weldstatepushButton">
+             <property name="text">
+              <string>下一个</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="maintan_arc_checkBox">
+             <property name="text">
+              <string>维弧开关</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="mainarc_checkBox">
+             <property name="text">
+              <string>主弧开关</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="current_box">
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>11</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="title">
+           <string>电流</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout">
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout">
-               <item>
-                <layout class="QGridLayout" name="gridLayout">
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label">
-                   <property name="text">
-                    <string>当前值：</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="2">
-                  <widget class="QLabel" name="label_3">
-                   <property name="text">
-                    <string>设置值：</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QLCDNumber" name="current_diaplay"/>
-                 </item>
-                 <item row="1" column="2">
-                  <widget class="QRadioButton" name="maintiancurrent_radioButton">
-                   <property name="text">
-                    <string>维弧电流</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QRadioButton" name="basecurrent_radioButton">
-                   <property name="text">
-                    <string>基值/引弧电流</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QRadioButton" name="weldcurrent_radioButton">
-                   <property name="text">
-                    <string>焊接电流</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="4">
-                  <widget class="QPushButton" name="current_pushButton">
-                   <property name="text">
-                    <string>设置</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="3">
-                  <widget class="QPushButton" name="pushButton_6">
-                   <property name="text">
-                    <string>下一个</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="3">
-                  <widget class="QSpinBox" name="current_spinBox"/>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_4">
-            <property name="font">
-             <font>
-              <family>Times New Roman</family>
-              <pointsize>11</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="title">
-             <string>时间</string>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_4">
-             <item>
-              <layout class="QGridLayout" name="gridLayout_2">
-               <item row="2" column="2">
-                <widget class="QPushButton" name="weldtime_pushButton">
-                 <property name="text">
-                  <string>设置</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QLCDNumber" name="timedisplay"/>
-               </item>
-               <item row="2" column="3">
-                <widget class="QRadioButton" name="intelvaltime_radioButton">
-                 <property name="text">
-                  <string>间隔时间/ms</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QSpinBox" name="weld_time_spinBox"/>
-               </item>
-               <item row="2" column="0">
-                <widget class="QRadioButton" name="weld_time_radiobutton">
-                 <property name="text">
-                  <string>焊接时间/ms</string>
-                 </property>
-                </widget>
-               </item>
+              <layout class="QGridLayout" name="gridLayout">
                <item row="0" column="0">
-                <widget class="QLabel" name="label_2">
+                <widget class="QLabel" name="label">
                  <property name="text">
                   <string>当前值：</string>
                  </property>
@@ -341,249 +216,449 @@ p, li { white-space: pre-wrap; }
                  </property>
                 </widget>
                </item>
-               <item row="2" column="4">
-                <widget class="QSpinBox" name="internal_time_spinBox"/>
-               </item>
-               <item row="2" column="5">
-                <widget class="QPushButton" name="internaltime_pushButton">
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_3">
                  <property name="text">
-                  <string>设置</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QRadioButton" name="uptime_radioButton">
-                 <property name="text">
-                  <string>上升时间/s</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QRadioButton" name="down_time_radioButton">
-                 <property name="text">
-                  <string>下降时间/s</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QRadioButton" name="gas_delay_radioButton">
-                 <property name="text">
-                  <string>保护气延时/s</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QRadioButton" name="protect_gas_radioButton">
-                 <property name="text">
-                  <string>保护气提前/s</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5">
-                <widget class="QPushButton" name="pushButton_5">
-                 <property name="text">
-                  <string>下一个</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QDoubleSpinBox" name="up_down_time_doubleSpinBox"/>
-               </item>
-               <item row="4" column="2">
-                <widget class="QSpinBox" name="gas_time_spinBox"/>
-               </item>
-               <item row="4" column="3">
-                <widget class="QPushButton" name="gastime_pushButton">
-                 <property name="text">
-                  <string>设置</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="3">
-                <widget class="QPushButton" name="updowntime_pushButton">
-                 <property name="text">
-                  <string>设置</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_5">
-            <property name="font">
-             <font>
-              <family>Times New Roman</family>
-              <pointsize>11</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="title">
-             <string>送粉和气体</string>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_5">
-             <item>
-              <layout class="QGridLayout" name="gridLayout_3">
-               <item row="2" column="4">
-                <widget class="QPushButton" name="powder_state">
-                 <property name="text">
-                  <string>下一个</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QSpinBox" name="motospeed_spinBox"/>
-               </item>
-               <item row="0" column="4">
-                <widget class="QCheckBox" name="powder_checkBox">
-                 <property name="text">
-                  <string>送粉开关</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QLCDNumber" name="senpowder_value_display"/>
-               </item>
-               <item row="0" column="3">
-                <widget class="QPushButton" name="pushButton_4">
-                 <property name="text">
-                  <string>下一个</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_5">
-                 <property name="text">
-                  <string>送粉方式：</string>
+                  <string>设置值：</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="3">
-                <widget class="QPushButton" name="motospeed_pushButton">
-                 <property name="text">
-                  <string>设置</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="1">
-                <widget class="QRadioButton" name="gas_check_end_radioButton">
-                 <property name="text">
-                  <string>气检结束</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="4">
-                <widget class="QPushButton" name="send_powder_delay_pushButton">
-                 <property name="text">
-                  <string>设置</string>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="QRadioButton" name="manual_send_powder_radioButton">
+                <widget class="QLCDNumber" name="current_diaplay"/>
+               </item>
+               <item row="1" column="2">
+                <widget class="QRadioButton" name="maintiancurrent_radioButton">
                  <property name="text">
-                  <string>手动送粉</string>
+                  <string>维弧电流</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="2">
-                <widget class="QRadioButton" name="send_powder_delay_end_radioButton">
+               <item row="1" column="1">
+                <widget class="QRadioButton" name="basecurrent_radioButton">
                  <property name="text">
-                  <string>收弧送粉延时</string>
+                  <string>基值/引弧电流</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="4">
-                <widget class="QRadioButton" name="protect_gas_radioButton_2">
+               <item row="1" column="0">
+                <widget class="QRadioButton" name="weldcurrent_radioButton">
                  <property name="text">
-                  <string>保护气</string>
+                  <string>焊接电流</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="2">
-                <widget class="QRadioButton" name="auto_send_powder_radioButton">
+               <item row="0" column="4">
+                <widget class="QPushButton" name="current_pushButton">
                  <property name="text">
-                  <string>自动送粉</string>
+                  <string>设置</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="3">
-                <widget class="QRadioButton" name="ionic_gas_radioButton">
-                 <property name="text">
-                  <string>离子气</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="3">
-                <widget class="QSpinBox" name="send_powder_delay_spinBox"/>
-               </item>
-               <item row="4" column="1">
-                <widget class="QRadioButton" name="sendpowderdelay_radioButton">
-                 <property name="text">
-                  <string>起弧送粉延时</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="4">
-                <widget class="QPushButton" name="gas_check_pushButton">
+               <item row="1" column="3">
+                <widget class="QPushButton" name="pushButton_6">
                  <property name="text">
                   <string>下一个</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
-                <widget class="QRadioButton" name="motorspeed_radiobutton">
-                 <property name="text">
-                  <string>电机转速</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="0">
-                <widget class="QLabel" name="label_12">
-                 <property name="text">
-                  <string>气体检测状态：</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_11">
-                 <property name="text">
-                  <string>送粉状态：</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="2">
-                <widget class="QRadioButton" name="send_powder_gas_radioButton">
-                 <property name="text">
-                  <string>送粉气</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_6">
-                 <property name="text">
-                  <string>送粉当前值：</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
+               <item row="0" column="3">
+                <widget class="QSpinBox" name="current_spinBox"/>
                </item>
               </layout>
              </item>
             </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>11</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="title">
+           <string>时间</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="2" column="2">
+              <widget class="QPushButton" name="weldtime_pushButton">
+               <property name="text">
+                <string>设置</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLCDNumber" name="timedisplay"/>
+             </item>
+             <item row="2" column="3">
+              <widget class="QRadioButton" name="intelvaltime_radioButton">
+               <property name="text">
+                <string>间隔时间/ms</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QSpinBox" name="weld_time_spinBox"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QRadioButton" name="weld_time_radiobutton">
+               <property name="text">
+                <string>焊接时间/ms</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>当前值：</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="4">
+              <widget class="QSpinBox" name="internal_time_spinBox"/>
+             </item>
+             <item row="2" column="5">
+              <widget class="QPushButton" name="internaltime_pushButton">
+               <property name="text">
+                <string>设置</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QRadioButton" name="uptime_radioButton">
+               <property name="text">
+                <string>上升时间/s</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QRadioButton" name="down_time_radioButton">
+               <property name="text">
+                <string>下降时间/s</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QRadioButton" name="gas_delay_radioButton">
+               <property name="text">
+                <string>保护气延时/s</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QRadioButton" name="protect_gas_radioButton">
+               <property name="text">
+                <string>保护气提前/s</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="5">
+              <widget class="QPushButton" name="pushButton_5">
+               <property name="text">
+                <string>下一个</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QDoubleSpinBox" name="up_down_time_doubleSpinBox"/>
+             </item>
+             <item row="4" column="2">
+              <widget class="QSpinBox" name="gas_time_spinBox"/>
+             </item>
+             <item row="4" column="3">
+              <widget class="QPushButton" name="gastime_pushButton">
+               <property name="text">
+                <string>设置</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="3">
+              <widget class="QPushButton" name="updowntime_pushButton">
+               <property name="text">
+                <string>设置</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_5">
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>11</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="title">
+           <string>送粉和气体</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <layout class="QGridLayout" name="gridLayout_3">
+             <item row="2" column="4">
+              <widget class="QPushButton" name="powder_state">
+               <property name="text">
+                <string>下一个</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QSpinBox" name="motospeed_spinBox"/>
+             </item>
+             <item row="0" column="4">
+              <widget class="QCheckBox" name="powder_checkBox">
+               <property name="text">
+                <string>送粉开关</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLCDNumber" name="senpowder_value_display"/>
+             </item>
+             <item row="0" column="3">
+              <widget class="QPushButton" name="pushButton_4">
+               <property name="text">
+                <string>下一个</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>送粉方式：</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="3">
+              <widget class="QPushButton" name="motospeed_pushButton">
+               <property name="text">
+                <string>设置</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QRadioButton" name="gas_check_end_radioButton">
+               <property name="text">
+                <string>气检结束</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="4">
+              <widget class="QPushButton" name="send_powder_delay_pushButton">
+               <property name="text">
+                <string>设置</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QRadioButton" name="manual_send_powder_radioButton">
+               <property name="text">
+                <string>手动送粉</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QRadioButton" name="send_powder_delay_end_radioButton">
+               <property name="text">
+                <string>收弧送粉延时</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="4">
+              <widget class="QRadioButton" name="protect_gas_radioButton_2">
+               <property name="text">
+                <string>保护气</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QRadioButton" name="auto_send_powder_radioButton">
+               <property name="text">
+                <string>自动送粉</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="3">
+              <widget class="QRadioButton" name="ionic_gas_radioButton">
+               <property name="text">
+                <string>离子气</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="3">
+              <widget class="QSpinBox" name="send_powder_delay_spinBox"/>
+             </item>
+             <item row="4" column="1">
+              <widget class="QRadioButton" name="sendpowderdelay_radioButton">
+               <property name="text">
+                <string>起弧送粉延时</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="4">
+              <widget class="QPushButton" name="gas_check_pushButton">
+               <property name="text">
+                <string>下一个</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QRadioButton" name="motorspeed_radiobutton">
+               <property name="text">
+                <string>电机转速</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>气体检测状态：</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_11">
+               <property name="text">
+                <string>送粉状态：</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="2">
+              <widget class="QRadioButton" name="send_powder_gas_radioButton">
+               <property name="text">
+                <string>送粉气</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>送粉当前值：</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="1" rowspan="4">
+     <widget class="Line" name="line">
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
+      <property name="lineWidth">
+       <number>3</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QLabel" name="label_17">
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; color:#aa0000;&quot;&gt;机器人通讯&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <layout class="QHBoxLayout" name="horizontalLayout_18">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="0,0">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>IP地址：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="txtIp">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="echoMode">
+             <enum>QLineEdit::Normal</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QLabel" name="label_9">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>端口：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="txtPort">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
            </widget>
           </item>
          </layout>
@@ -591,33 +666,219 @@ p, li { white-space: pre-wrap; }
        </layout>
       </item>
       <item>
-       <widget class="Line" name="line">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+       <widget class="QPushButton" name="pushConnect">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>连接</string>
         </property>
        </widget>
       </item>
+     </layout>
+    </item>
+    <item row="2" column="2">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_7">
+       <layout class="QHBoxLayout" name="horizontalLayout_17">
+        <property name="spacing">
+         <number>98</number>
+        </property>
         <item>
-         <widget class="QLabel" name="label_14">
+         <widget class="QPushButton" name="cur_mode">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; color:#aa0000;&quot;&gt;数据采集&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>当前模式</string>
           </property>
          </widget>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
+         <widget class="QPushButton" name="get_cur_job">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>获取当前任务</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="servo_on_off">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>伺服开关</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_16">
+        <item>
+         <widget class="QLabel" name="label_15">
+          <property name="styleSheet">
+           <string notr="true">font: 11pt &quot;Arial&quot;;</string>
+          </property>
+          <property name="text">
+           <string>接收信号参数：</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="wait_out_index_spinBox">
+          <property name="styleSheet">
+           <string notr="true">font: 11pt &quot;Times New Roman&quot;;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="spacing">
+         <number>40</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_13">
           <property name="spacing">
            <number>6</number>
           </property>
-          <property name="bottomMargin">
-           <number>0</number>
+          <item>
+           <widget class="QPushButton" name="start_cur_job">
+            <property name="font">
+             <font>
+              <family>Times New Roman</family>
+              <pointsize>11</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 11pt &quot;宋体&quot;;
+font: 11pt &quot;Times New Roman&quot;;</string>
+            </property>
+            <property name="text">
+             <string>启动当前任务</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="start_job_lineEdit">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_14">
+          <property name="spacing">
+           <number>6</number>
           </property>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <widget class="QPushButton" name="set_cur_job">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>设置当前任务</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="cur_job_lineEdit">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_15">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="label_16">
+          <property name="styleSheet">
+           <string notr="true">font: 11pt &quot;Times New Roman&quot;;</string>
+          </property>
+          <property name="text">
+           <string>发送信号参数：</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="DOUT_index_spinBox">
+          <property name="styleSheet">
+           <string notr="true">font: 11pt &quot;Times New Roman&quot;;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="2">
+     <widget class="QTextEdit" name="textEdit"/>
+    </item>
+    <item row="4" column="0" colspan="3">
+     <widget class="Line" name="line_2">
+      <property name="lineWidth">
+       <number>3</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0" colspan="2">
+     <layout class="QVBoxLayout" name="verticalLayout_13">
+      <item>
+       <widget class="QLabel" name="label_14">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; color:#aa0000;&quot;&gt;数据采集&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_7">
             <property name="spacing">
-             <number>92</number>
+             <number>67</number>
             </property>
             <item>
              <widget class="QPushButton" name="data_collect_initial_pushButton">
@@ -674,9 +935,16 @@ p, li { white-space: pre-wrap; }
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_3">
+           <layout class="QVBoxLayout" name="verticalLayout_8">
             <item>
              <layout class="QGridLayout" name="gridLayout_4">
+              <item row="0" column="1">
+               <widget class="QLCDNumber" name="AI_Current">
+                <property name="smallDecimalPoint">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="0">
                <widget class="QLabel" name="label_4">
                 <property name="styleSheet">
@@ -687,13 +955,6 @@ p, li { white-space: pre-wrap; }
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLCDNumber" name="AI_Current">
-                <property name="smallDecimalPoint">
-                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -709,7 +970,7 @@ p, li { white-space: pre-wrap; }
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_4">
+           <layout class="QVBoxLayout" name="verticalLayout_9">
             <item>
              <layout class="QGridLayout" name="gridLayout_5">
               <item row="0" column="0">
@@ -743,32 +1004,32 @@ p, li { white-space: pre-wrap; }
             </item>
            </layout>
           </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_8">
-            <item>
-             <widget class="QLineEdit" name="savepath_edit_3">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="BrowserBtn_3">
-              <property name="font">
-               <font>
-                <family>Arial</family>
-                <pointsize>11</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>设置保存路径</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <widget class="QLineEdit" name="savepath_edit_3">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="BrowserBtn_3">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>设置保存路径</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>

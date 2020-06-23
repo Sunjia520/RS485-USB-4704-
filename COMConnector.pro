@@ -1,10 +1,14 @@
 QT       += core gui
 QT       += serialport
 QT       += charts
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 INCLUDEPATH +="C:\Advantech\DAQNavi\Inc"
+
+TARGET = myTcpClient
+TEMPLATE = app
 
 CONFIG += c++11
 
@@ -23,11 +27,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    controlthread.cpp
+    controlthread.cpp \
+    mythread.cpp
 
 HEADERS += \
     mainwindow.h \
-    controlthread.h
+    controlthread.h \
+    COMMANDS.h \
+    mythread.h
 
 FORMS += \
     mainwindow.ui

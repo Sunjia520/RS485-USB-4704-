@@ -3,6 +3,9 @@
 #include <iostream>
 #include <QMetaType>
 #include <memory>
+#include <COMMANDS.h>
+
+#pragma execution_character_set("utf-8")
 
 Q_DECLARE_METATYPE(QVector<double>);
 
@@ -87,9 +90,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->motospeed_spinBox->setRange(1,100);
     ui->send_powder_delay_spinBox->setRange(-5,5);
 
+    ui->DOUT_index_spinBox->setRange(1,1000);
+    ui->wait_out_index_spinBox->setRange(1,1000);
+
     ui->current_diaplay->setPalette(Qt::green);
     ui->timedisplay->setPalette(Qt::green);
     ui->senpowder_value_display->setPalette(Qt::green);
+
+    ui->mainarc_checkBox->setEnabled(false);
 
 
     ui->weldcurrent_radioButton->setStyleSheet("QRadioButton::indicator {width:15px;height:15px;border-radius:7px}"
@@ -187,6 +195,10 @@ MainWindow::MainWindow(QWidget *parent)
          "QCheckBox::indicator {width: 15px; height:15px;}"
           "QCheckBox::indicator:unchecked {background-color:white;}"
           "QCheckBox::indicator:checked {background-color:green;}");
+    ui->servo_on_off->setStyleSheet(
+         "QCheckBox::indicator {width: 15px; height:15px;}"
+          "QCheckBox::indicator:unchecked {background-color:white;}"
+          "QCheckBox::indicator:checked {background-color:green;}");
 
 
     connect(mycom_port,SIGNAL(readyRead()),this,SLOT(read_port()));
@@ -261,6 +273,16 @@ MainWindow::MainWindow(QWidget *parent)
         ui->data_collect_save_pushButton->setEnabled(false);
         ui->data_collect_stop_pushButton->setEnabled(false);
         ui->data_collect_start_pushButton->setEnabled(false);
+
+
+        //TCP客户端初始化
+        tcpClient = new QTcpSocket(this);
+        this->ui->txtIp->setText("192.168.255.1");
+        this->ui->txtPort->setText("11000");
+
+        thread=new MyThread(this);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -268,6 +290,7 @@ MainWindow::~MainWindow()
     delete ui;
     delete mycom_port;
     delete my_exchange_data;
+    delete tcpClient;
 }
 
 void MainWindow::search_port_add_combox(){
@@ -328,8 +351,6 @@ void MainWindow::get_fullinfo_from_slave(){
     this->my_exchange_data->send_data[4] = 0x1d;
     mycom_port->write(my_exchange_data->send_data, 5);
     //std::cout << mycom_port->readAll().size() << std::endl;
-
-
     //parse_data();
 }
 
@@ -444,19 +465,14 @@ void MainWindow::on_disconnectButton_clicked()
     mycom_port->close();
 }
 
-
-/*void MainWindow::on_weld_state_combox_currentIndexChanged(int index)
-{
-    my_exchange_data->send_data[1] = 0x02;
-    my_exchange_data->send_data[2] = 0x00;
-    my_exchange_data->send_data[3] = 0x00;
-    my_exchange_data->send_data[4] = 0x11;
-    //my_exchange_data->recive_data.clear();
-    mycom_port->write(my_exchange_data->send_data, 5);
-}*/
-
 void MainWindow::on_weldstatepushButton_clicked()
 {
+//    if(!(ui->maintan_arc_checkBox->isChecked())){
+//        QMessageBox::warning(this, tr("Warning"), tr("请先打开维弧"), QMessageBox::Ok);
+//        emit maintain_arc_off();
+//        return;
+//    }
+
     my_exchange_data->send_data[1] = 0x02;
     my_exchange_data->send_data[2] = 0x00;
     my_exchange_data->send_data[3] = 0x00;
@@ -483,7 +499,7 @@ void MainWindow::on_powder_checkBox_clicked()
     mycom_port->write(my_exchange_data->send_data, 5);
 }
 
-void MainWindow::on_maintan_arc_checkBox_clicked()
+void MainWindow::on_maintan_arc_checkBox_clicked(bool checked)
 {
     my_exchange_data->send_data[1] = 0x03;
     my_exchange_data->send_data[2] = 0x00;
@@ -491,10 +507,23 @@ void MainWindow::on_maintan_arc_checkBox_clicked()
     my_exchange_data->send_data[4] = 0x12;
     my_exchange_data->recive_data.clear();
     mycom_port->write(my_exchange_data->send_data, 5);
+    if(checked){
+        ui->mainarc_checkBox->setEnabled(true);
+    }else{
+        ui->mainarc_checkBox->setEnabled(false);
+    }
 }
 
 void MainWindow::on_mainarc_checkBox_clicked()
 {
+    if(!(ui->maintan_arc_checkBox->isChecked())){
+        QMessageBox::warning(this, tr("Warning"), tr("请先打开维弧"), QMessageBox::Ok);
+        emit maintain_arc_off();
+        return;
+    }
+    ui->mainarc_checkBox->setChecked(arc_status);
+    arc_status=!arc_status;
+
     my_exchange_data->send_data[1] = 0x0a;
     my_exchange_data->send_data[2] = 0x00;
     my_exchange_data->send_data[3] = 0x00;
@@ -707,10 +736,9 @@ void MainWindow::on_data_collect_initial_pushButton_clicked()
     {
         QMessageBox::information(this, tr("Information"), mpControlThread->GetDeviceName()+tr(" 已连接"), QMessageBox::Ok);
     }
-    connect(mpControlThread, SIGNAL(SendAnalogData(QVector<double>)), this, SLOT(ReceiveAnalogData(QVector<double>)));
     ui->data_collect_save_pushButton->setEnabled(true);
-    //ui->data_collect_stop_pushButton->setEnabled(true);
     ui->data_collect_start_pushButton->setEnabled(true);
+    ui->data_collect_initial_pushButton->setEnabled(false);
 }
 
 
@@ -719,6 +747,7 @@ void MainWindow::on_data_collect_start_pushButton_clicked()
 {
     if (mpControlThread != nullptr && !mpControlThread->IsCollecting())
         {
+         connect(mpControlThread, SIGNAL(SendAnalogData(QVector<double>)), this, SLOT(ReceiveAnalogData(QVector<double>)));
             i_series->clear();
             v_series->clear();
             mpControlThread->StartCollect();
@@ -726,8 +755,6 @@ void MainWindow::on_data_collect_start_pushButton_clicked()
             ui->data_collect_start_pushButton->setEnabled(false);
         }
 }
-
-
 
 void MainWindow::on_data_collect_stop_pushButton_clicked()
 {
@@ -750,8 +777,6 @@ void MainWindow::on_data_collect_save_pushButton_clicked()
         char tmp_time[64];
         strftime(tmp_time, sizeof(tmp_time), "%Y%m%d%H%M", localtime(&t));
         std::string savePath = g_SaveFolder + "\\" + std::string(tmp_time)+".csv";
-        //mkdir(savePath.c_str());
-        //mpControlThread->SetSavePath(savePath);
         mpControlThread->SetSavePath(savePath);
         mpControlThread->StartSaving();
 
@@ -765,7 +790,6 @@ void MainWindow::on_data_collect_save_pushButton_clicked()
 void MainWindow::on_BrowserBtn_3_clicked()
 {
     mSavePath = QFileDialog::getExistingDirectory(this, tr("Save Path"), "D:/");
-    std::cout<<mSavePath.size()<<std::endl;
 
     if (!mSavePath.isEmpty()) {
 
@@ -782,6 +806,7 @@ void MainWindow::ReceiveAnalogData(QVector<double> analogData)
     int iCurrent = static_cast<int>(analogData[0] * 219);
     int iVoltage = static_cast<int>(analogData[1] * 21);
     double t = analogData[2];
+
     ui->AI_Current->display(iCurrent);
     ui->AI_Voltage->display(iVoltage);
 
@@ -789,3 +814,176 @@ void MainWindow::ReceiveAnalogData(QVector<double> analogData)
     i_series->append(t, iCurrent);
     v_series->append(t, iVoltage);
 }
+
+
+
+//TCP客户端方法
+void MainWindow::on_pushConnect_clicked()
+{
+    tcpClient->abort();
+    connect(tcpClient,&QTcpSocket::readyRead,
+            this,&MainWindow::recv_response);
+    connect(tcpClient,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(ReadError(QAbstractSocket::SocketError)));
+//    connect(&tm,&QTimer::timeout,[&](){
+//            int i = qrand() % 6;
+//            this->ui->textEdit->append(tr("%1 Timer Sent: %2").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(list.at(i)));
+//            tcpClient->write(list.at(i).toUtf8());
+//    });
+    //connect(tcpClient,&QTcpSocket::disconnected,[](){qDebug()<< "123333" ;});
+//    QTime time;
+//    time= QTime::currentTime();
+//    qsrand(time.msec()+time.second()*1000);
+    if ("连接" == this->ui->pushConnect->text())
+    {
+        QString ipAdd(this->ui->txtIp->text()), portd(this->ui->txtPort->text());
+        if (ipAdd.isEmpty() || portd.isEmpty())
+        {
+            this->ui->textEdit->append("请输入IP和端口!");
+            return;
+        }
+        tcpClient->connectToHost(ipAdd,portd.toInt());
+        if (tcpClient->waitForConnected(1000))
+        {
+            ui->pushConnect->setEnabled(false);
+            ui->textEdit->append("连接服务器成功");
+            ui->txtIp->setEnabled(false);
+            ui->txtPort->setEnabled(false);
+        }
+    }
+}
+
+void MainWindow::recv_response(){
+
+    recvStr=QString(this->tcpClient->readAll());
+    if(recvStr.startsWith("DOUT1")){
+        emit stop_read();
+        read_first=true;
+    }
+    if(recvStr.startsWith("WAIT1")){
+        emit stop_send();
+    }
+    if(read_first&&recvStr.startsWith("DOUT0")){
+        emit fire_off();
+    }
+    this->ui->textEdit->append(tr("%1 Server Say：%2").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(recvStr));
+}
+
+void MainWindow::ReadError(QAbstractSocket::SocketError)
+{
+    tcpClient->disconnectFromHost();
+    ui->pushConnect->setText("连接");
+    ui->textEdit->append(tr("连接出错：%1").arg(tcpClient->errorString()));
+    this->ui->txtIp->setEnabled(true);
+    this->ui->txtPort->setEnabled(true);
+    tm.stop();
+
+ }
+
+
+void MainWindow::on_servo_on_off_clicked(bool checked)
+{
+    if(checked){
+        sActiveCmd.sprintf("cmd=%d;a1=%d;a2=%d;a3=%d;a4=%d;a5=%d;", CMD_MpSetServoPower, 1, 0, 0, 0, 0);
+        tcpClient->write(sActiveCmd.toUtf8());
+        ui->textEdit->append(tr("Client Say:turn on servo\r\n"));
+    }else{
+        sActiveCmd.sprintf("cmd=%d;a1=%d;a2=%d;a3=%d;a4=%d;a5=%d;", CMD_MpSetServoPower, 0, 0, 0, 0, 0);
+        tcpClient->write(sActiveCmd.toUtf8());
+        ui->textEdit->append(tr("Client Say:turn off servo\r\n"));
+    }
+
+}
+
+void MainWindow::on_get_cur_job_clicked()
+{
+    sActiveCmd.sprintf("cmd=%d;a1=%d;a2=%d;a3=%d;a4=%d;a5=%d;", CMD_MpGetCurJob, 0, 0, 0, 0, 0);
+    tcpClient->write(sActiveCmd.toUtf8());
+    ui->textEdit->append(tr("Client Say:get current job\r\n"));
+}
+
+void MainWindow::on_start_cur_job_clicked()
+{
+    if(!(ui->servo_on_off->isChecked())){
+        QMessageBox::warning(this, tr("Warning"), tr("请先打开伺服"), QMessageBox::Ok);
+        return;
+    }
+    read_first=false;
+    QString sJobName=ui->start_job_lineEdit->text();
+    if(sJobName.isEmpty()){
+        QMessageBox::warning(this, tr("Warning"), tr("请填写启动任务名称"), QMessageBox::Ok);
+        return;
+    }
+
+    sActiveCmd.sprintf("cmd=%d;a1=%d;a2=%s;", CMD_MpStartJob,0, sJobName.toLatin1().data());
+    tcpClient->write(sActiveCmd.toUtf8());
+    ui->textEdit->append(tr("Client Say:start current job\r\n"));
+
+
+    connect(this,SIGNAL(initThread()),thread,SLOT(init()));
+    emit initThread();
+    connect(thread,SIGNAL(read_out()),this,SLOT(readIO()));
+    connect(thread,SIGNAL(send_out()),this,SLOT(sendIO()));
+    connect(thread,SIGNAL(arc_on()),this,SLOT(on_mainarc_checkBox_clicked()));
+    connect(thread,SIGNAL(arc_off()),this,SLOT(on_mainarc_checkBox_clicked()));
+    connect(this,SIGNAL(stop_read()),thread,SLOT(stop_read()));
+    connect(this,SIGNAL(stop_send()),thread,SLOT(stop_send()));
+    connect(this,SIGNAL(fire_off()),thread,SLOT(fire_off()));
+    connect(this,SIGNAL(maintain_arc_off()),thread,SLOT(maintain_arc_stop()));
+    thread->start();
+
+}
+
+
+void MainWindow::on_set_cur_job_clicked()
+{
+    QString sJobLine,sJobName;
+    sJobLine=ui->cur_job_lineEdit->text();
+    sJobName=ui->cur_job_lineEdit->text();
+    sActiveCmd.sprintf("cmd=%d;a1=%s;a2=%s;", CMD_MpSetCurJob, sJobLine.toLatin1().data(), sJobName.toLatin1().data());
+    tcpClient->write(sActiveCmd.toUtf8());
+    ui->textEdit->append(tr("Client Say:set current job\r\n"));
+}
+
+
+
+void MainWindow::on_cur_mode_clicked()
+{
+    sActiveCmd.sprintf("cmd=%d;a1=%d;a2=%d;a3=%d;a4=%d;a5=%d;", CMD_MpGetMode, 0, 0, 0, 0, 0);
+    tcpClient->write(sActiveCmd.toUtf8());
+    ui->textEdit->append(tr("Client Say:get current job\r\n"));
+}
+
+void MainWindow::sendIO(){
+    //改变的out的索引，机器人上面看的
+    QString index=ui->DOUT_index_spinBox->text();
+    //改变index及后面qty个输出的值
+    QString qty='1';
+    //1代表on
+    QString val='1';
+    //数字1代表通用输出，
+    sActiveCmd.sprintf("cmd=%d;a1=%d;a2=%s;a3=%s;a4=%s;", CMD_MpWriteIO, 1, index.toLatin1().data(), qty.toLatin1().data(), val.toLatin1().data());
+    tcpClient->write(sActiveCmd.toUtf8());
+}
+
+void MainWindow::readIO(){
+
+    QString index=ui->wait_out_index_spinBox->text();
+    QString qty='1';
+    sActiveCmd.sprintf("cmd=%d;a1=%d;a2=%s;a3=%s;", CMD_MpReadIO, 1, index.toLatin1().data(), qty.toLatin1().data());
+    tcpClient->write(sActiveCmd.toUtf8());
+
+}
+
+void MainWindow::closeEvent(QCloseEvent *event){
+    sActiveCmd.sprintf("cmd=%d;a1=%d;a2=%d;a3=%d;a4=%d;a5=%d;", CMD_STOP, 0, 0, 0, 0, 0);
+    tcpClient->write(sActiveCmd.toUtf8());
+    tcpClient->disconnectFromHost();
+    tcpClient->close();
+
+//    thread->quit();
+//    thread->wait();
+
+}
+
+
+

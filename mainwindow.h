@@ -25,6 +25,9 @@
 #include <QTimer>
 #include <math.h>
 #include <memory>
+#include <QtCore>
+#include <QtNetwork>
+#include "mythread.h"
 
 #include "controlthread.h"
 
@@ -51,6 +54,23 @@ signals:
     void signal_24_data();
     void signal_4_data();
 
+    void stop_read();
+    void stop_send();
+
+    void initThread();
+    void fire_off();
+
+    void maintain_arc_off();
+
+//TCP 客户端使用的槽函数
+public slots:
+    void ReadError(QAbstractSocket::SocketError);
+    void on_pushConnect_clicked();
+
+    void sendIO();
+
+    void readIO();
+
 private slots:
     void on_checkButton_clicked();
     void read_port();
@@ -68,7 +88,8 @@ private slots:
 
     void on_powder_checkBox_clicked();
 
-    void on_maintan_arc_checkBox_clicked();
+   // void on_maintan_arc_checkBox_clicked();
+    void on_maintan_arc_checkBox_clicked(bool checked);
 
     void on_mainarc_checkBox_clicked();
 
@@ -111,6 +132,22 @@ private slots:
 
     void on_BrowserBtn_3_clicked();
 
+    //TCP 客户端的槽函数
+    void on_servo_on_off_clicked(bool checked);
+
+    void on_get_cur_job_clicked();
+
+    void on_start_cur_job_clicked();
+
+    void on_set_cur_job_clicked();
+
+    void on_cur_mode_clicked();
+
+    void recv_response();
+
+
+
+
 private:
     Ui::MainWindow *ui;
     QSerialPort* mycom_port;
@@ -139,6 +176,20 @@ private:
     QValueAxis* v_axisX;
     QValueAxis* v_axisY;
     ControlThread* mpControlThread = nullptr;
+
+    //TCP客户端的变量
+    QTcpSocket * tcpClient;
+    QTimer tm;
+    QStringList list;
+    QString sActiveCmd;
+    QString recvStr;
+    void closeEvent(QCloseEvent *);
+
+    MyThread* thread;
+
+    volatile bool read_first=false;
+
+    bool arc_status=true;
 
 };
 #endif // MAINWINDOW_H

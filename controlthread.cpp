@@ -46,20 +46,20 @@ void ControlThread::DataHandler(void *sender, BfdAiEventArgs *args)
         std::vector<double> AI(channelCount, 0);
         for (; i < total; ++i) {
             AI[i % channelCount] += mpScaledData[i];
-//            if (mIsSaving == true)
-//            {
-//                mTextStream << mpScaledData[i] << ",";
-//                if (i % 2 == 1) mTextStream << '\n';
-//            }
+            if (mIsSaving == true)
+            {
+                mTextStream << mpScaledData[i] << ",";
+                if (i % 2 == 1) mTextStream << '\n';
+            }
         }
         mAnalogData.resize(channelCount + 1);
         for (int j = 0; j < channelCount; ++j) {
             mAnalogData[j] = AI[j] / dataPerRound*2;
-            if (mIsSaving == true)
-            {
-                mTextStream << mAnalogData[j] << ",";
-                if (j % 2 == 1) mTextStream << '\n';
-            }
+//            if (mIsSaving == true)
+//            {
+//                mTextStream << mAnalogData[j] << ",";
+//                if (j % 2 == 1) mTextStream << '\n';
+//            }
         }
         double t = QString::number(mTime.elapsed() / 1000.0, 10, 3).toDouble();
         mAnalogData[channelCount] = t;
